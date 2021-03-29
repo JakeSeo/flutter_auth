@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/components/already_have_an_account_check.dart';
 import 'package:flutter_auth/components/rounded_button.dart';
-import 'package:flutter_auth/components/rounded_password_field.dart';
 import 'package:flutter_auth/components/rounded_input_field.dart';
-import 'package:flutter_auth/screens/signup/signup_screen.dart';
+import 'package:flutter_auth/components/rounded_password_field.dart';
+import 'package:flutter_auth/screens/login/login_screen.dart';
+import 'package:flutter_auth/screens/signup/components/background.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'background.dart';
+import '../../../constants.dart';
+import '../social_icon.dart';
+import 'or_divider.dart';
 
 class Body extends StatelessWidget {
-  const Body({
-    Key key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -20,15 +19,15 @@ class Body extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             Text(
-              "LOGIN",
+              "SIGNUP",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(height: size.height * 0.03),
             SvgPicture.asset(
-              "assets/icons/login.svg",
-              height: size.height * 0.3,
+              "assets/icons/signup.svg",
+              height: size.height * 0.35,
             ),
             RoundedInputField(
               hintText: "Your Email",
@@ -38,21 +37,40 @@ class Body extends StatelessWidget {
               onChanged: (value) {},
             ),
             RoundedButton(
-              text: "LOGIN",
+              text: "SIGNUP",
               press: () {},
             ),
             SizedBox(height: size.height * 0.03),
             AlreadyHaveAnAccountCheck(
+              login: false,
               press: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return SignupScreen();
+                      return LoginScreen();
                     },
                   ),
                 );
               },
+            ),
+            OrDivider(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SocialIcon(
+                  iconSrc: "assets/icons/facebook.svg",
+                  press: () {},
+                ),
+                SocialIcon(
+                  iconSrc: "assets/icons/twitter.svg",
+                  press: () {},
+                ),
+                SocialIcon(
+                  iconSrc: "assets/icons/google-plus.svg",
+                  press: () {},
+                ),
+              ],
             ),
           ],
         ),
